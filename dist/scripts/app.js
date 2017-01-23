@@ -11,12 +11,19 @@
              url: '/',
              templateUrl: '/templates/landing.html'
         })
-         .state('album', {
-             url: '/album',
-             templateUrl: '/templates/album.html'
-         });
- }
-
+         
+   $stateProvider
+            .state('album', {
+                url: '/album',
+                templateUrl: '/templates/album.html'
+        })
+        $stateProvider
+            .state('collection', {
+                url: '/collection',
+                templateUrl: '/templates/collection.html'
+        });
+        
+    }
      angular
          .module('blocJams', ['ui.router'])
          .config(config);
