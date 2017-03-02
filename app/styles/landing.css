@@ -11,6 +11,7 @@
      background-size: cover;
      
  }
+ 
  .hero-content .hero-title {
      position: absolute;
      top: 40%;
@@ -18,7 +19,7 @@
      -moz-transform: translateY(-50%);
      transform: translateY(-50%);
      width: 100%;
-     text-align: center; 
+     text-align: center;
      font-size: 4rem;
      font-weight: 300;
      text-transform: uppercase;
@@ -43,7 +44,10 @@
      -moz-transform: scaleX(0.9) translateY(3rem);
       transform: scaleX(0.9) translateY(3rem);
       
-     
+    
+     -webkit-transition-delay: 0.2s;
+     -moz-transition-delay: 0.2s;
+     transition-delay: 0.2s;
  }
  
  .point .point-title {
