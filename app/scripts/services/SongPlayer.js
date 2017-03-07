@@ -1,5 +1,5 @@
 (function() {
-  function SongPlayer($rootScope, Fixtures) {
+  function SongPlayer(Fixtures) {
     var SongPlayer = {};
 
     /**
@@ -29,21 +29,7 @@
         preload: true
       });
 
-      currentBuzzObject.bind('timeupdate', function() {
-        $rootScope.$apply(function() {
-          SongPlayer.currentTime = currentBuzzObject.getTime();
-        });
-      });
-
-      currentBuzzObject.bind('volumeupdate', function() {
-        $rootScope.$apply(function() {
-          SongPlayer.currentVolume = currentBuzzObject.setVolume();
-        });
-      });
-
       SongPlayer.currentSong = song;
-
-
     };
 
     /**
@@ -66,6 +52,8 @@
       SongPlayer.currentSong.playing = null;
     };
 
+
+
     /**
     * @function getSongIndex
     * @desc gets index of song
@@ -76,22 +64,10 @@
     };
 
     /**
-    * @desc Current song from album
+    * @desc song from album
     * @type {Object}
     */
     SongPlayer.currentSong = null;
-
-    /**
-    * @desc Current playback time (in seconds) of currently playing song
-    * @type {Number}
-    */
-    SongPlayer.currentTime = null;
-
-    /**
-    * @desc current volume
-    * @type {Number}
-    */
-    SongPlayer.currentVolume = null;
 
     /**
     * @function SongPLayer.play
@@ -130,13 +106,12 @@
       currentSongIndex--;
 
       if (currentSongIndex < 0) {
-         currentBuzzObject.stop();
-         SongPlayer.currentSong.playing = null;
-     } else {
-         var song = currentAlbum.songs[currentSongIndex];
-         setSong(song);
-         playSong(song);
-     }
+        stopSong(song);
+      } else {
+        var song = currentAlbum.songs[currentSongIndex];
+        setSong(song);
+        playSong(song);
+      }
     };
 
     /**
@@ -156,22 +131,10 @@
       }
     };
 
-    SongPlayer.setCurrentTime = function(time) {
-      if (currentBuzzObject) {
-        currentBuzzObject.setTime(time);
-      }
-    };
-
-    SongPlayer.setCurrentVolume = function(volume) {
-      if (currentBuzzObject) {
-        currentBuzzObject.setVolume(volume);
-      }
-    };
-
     return SongPlayer;
   }
 
   angular
     .module('blocJams')
-    .factory('SongPlayer', ['$rootScope', 'Fixtures', SongPlayer]);
+    .factory('SongPlayer', SongPlayer);
 })();
